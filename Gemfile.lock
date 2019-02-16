@@ -28,7 +28,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (>= 1.17.0)
   erubis
   pg
   puma
