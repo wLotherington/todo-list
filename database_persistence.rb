@@ -18,7 +18,7 @@ class DatabasePersistence
     sql = <<~SQL
       SELECT lists.*,
         count(todos.id) AS todos_count,
-        count(NULLIF(completed, true)) AS todos_remaining
+        count(NULLIF(todos.completed, true)) AS todos_remaining_count
         FROM lists
         LEFT OUTER JOIN todos ON todos.list_id = lists.id
         WHERE lists.id = $1
@@ -42,7 +42,7 @@ class DatabasePersistence
     sql = <<~SQL
       SELECT lists.*,
         count(todos.id) AS todos_count,
-        count(NULLIF(completed, true)) AS todos_remaining
+        count(NULLIF(todos.completed, true)) AS todos_remaining_count
         FROM lists
         LEFT OUTER JOIN todos ON todos.list_id = lists.id
         GROUP BY lists.id
