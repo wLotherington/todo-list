@@ -71,17 +71,8 @@ def error_for_todo(name)
 end
 
 before do
-  # @storage = SessionPersistence.new(session)
   @storage = DatabasePersistence.new(logger)
 end
-
-# def disconnect
-#   @db.close
-# end
-
-# after do
-#   @storage.disconnect
-# end
 
 get "/" do
   redirect "/lists"
@@ -214,4 +205,8 @@ post "/lists/:id/complete_all" do
 
   session[:success] = "All todos have been completed."
   redirect "/lists/#{@list_id}"
+end
+
+after do
+  @storage.disconnect
 end
